@@ -1,20 +1,55 @@
 <div>
-    <button mat-raised-button color="primary">Primary</button>
-    <mat-card>
-        <mat-card-title>Actions Buttons</mat-card-title>
-        <mat-card-subtitle>Start</mat-card-subtitle>
-        <mat-card-actions>
-          <button mat-button>LIKE</button>
-          <button mat-button>SHARE</button>
-        </mat-card-actions>
-      </mat-card>
-      <br>
-      <mat-card>
-        <mat-card-title>Actions Buttons</mat-card-title>
-        <mat-card-subtitle>End</mat-card-subtitle>
-        <mat-card-actions align="end">
-          <button mat-button>Like</button>
-          <button mat-button>SHARE</button>
-        </mat-card-actions>
-      </mat-card>
+      <form [formGroup]="ticketForm">
+        <mat-card>
+          <mat-card-title>Ticket Entry</mat-card-title>
+          <div class="innerCard">
+            <mat-card-content>
+              <div>
+                <mat-form-field appearance="fill" class="inputField required" aria-required="true">
+                  <mat-label>Name:</mat-label>
+                  <mat-select formControlName="person" name="person">
+                    <mat-option *ngFor="let user of users" [value]="user.fname">{{user.fname}}</mat-option>
+                  </mat-select>
+                  <div *ngIf="getPerson().invalid && getPerson().touched">Name required</div> 
+                </mat-form-field>
+              </div>
+              <div>
+                <mat-form-field appearance="fill" class="inputField">
+                  <mat-label>Working With:</mat-label>
+                  <mat-select formControlName="workingWith" name="workingWith">
+                    <mat-option *ngFor="let user of users" [value]="user.fname">{{user.fname}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div>
+                <mat-form-field appearance="fill" class="inputField required" aria-required="true">
+                  <mat-label>Price</mat-label>
+                  <input matInput type="number" formControlName="price" name="price">
+                  <div *ngIf="getPrice().invalid && getPrice().touched">Price required</div> 
+                </mat-form-field>
+              </div>
+              <div>
+                <mat-form-field appearance="fill" class="inputField required" aria-required="true">
+                  <mat-label>Tip (if cash, put 0)</mat-label>
+                  <input matInput type="number" formControlName="tip" name="tip">
+                  <div *ngIf="getTip().invalid && getTip().touched">Tip required</div> 
+                </mat-form-field>
+              </div>
+              <div>
+                <mat-slide-toggle formControlName="cash" [checked]="cashChecked" (toggleChange)="toggled()">Cash</mat-slide-toggle>
+              </div>
+              <div *ngIf="!cashChecked">
+                <mat-form-field appearance="fill" class="inputField required" aria-required="true">
+                  <mat-label>Transaction Number on Receipt</mat-label>
+                  <input matInput type="number" formControlName="transNumber" name="transNumber">
+                </mat-form-field>
+              </div>
+            </mat-card-content>
+          </div>
+          <mat-card-actions align="center">
+            <button type="reset" mat-button color="warn" (click)="onCancel()">Cancel</button>
+            <button type="submit" mat-button color="primary" (click)="onSubmit()">Submit</button>
+          </mat-card-actions>
+        </mat-card>
+      </form>
 </div>
