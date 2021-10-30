@@ -16,3 +16,8 @@
 .buttons{
     margin-right: 150px;
 }
+
+.loading{
+    margin: auto;
+    top: 50%;
+}

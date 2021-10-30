@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="!loading">
       <form [formGroup]="ticketForm">
         <mat-card>
           <mat-card-title>Ticket Entry</mat-card-title>
@@ -41,7 +41,7 @@
               <div *ngIf="!cashChecked">
                 <mat-form-field appearance="fill" class="inputField required" aria-required="true">
                   <mat-label>Transaction Number on Receipt</mat-label>
-                  <input matInput type="number" formControlName="transNumber" name="transNumber">
+                  <input matInput type="number" formControlName="transNum" name="transNum">
                 </mat-form-field>
               </div>
             </mat-card-content>
@@ -53,3 +53,4 @@
         </mat-card>
       </form>
 </div>
+<mat-spinner *ngIf="loading" class="loading"></mat-spinner>

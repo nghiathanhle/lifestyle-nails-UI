@@ -9,6 +9,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class TicketServicesService {
   constructor( private http: HttpClient ) { }
 
+  //Getting technician details
   getTechniciansAndStoreToLocalStorage(){
     let users: any;
     this.http.post<any>('https://us-central1-ntl-fb.cloudfunctions.net/getTechnicians',{}).subscribe(data => {  
@@ -16,5 +17,13 @@ export class TicketServicesService {
         localStorage.setItem('users', JSON.stringify(data.data))
         users = data.data;
     });
+  }
+
+  //Sending and persisting to the DB
+  sendTicket(data):boolean{
+    console.log(data);
+
+    //========Chabnge this=========
+    return true;
   }
 }

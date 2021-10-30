@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./ticket-entry.component.css']
 })
 export class TicketEntryComponent implements OnInit {
+  loading = false;
   users: [];
   cashChecked: boolean;
   ticketForm = new FormGroup({
@@ -18,7 +19,7 @@ export class TicketEntryComponent implements OnInit {
     price: new FormControl('', [Validators.required]),
     tip: new FormControl('', [Validators.required]),
     cash: new FormControl(''),
-    transNumber: new FormControl('')
+    transNum: new FormControl('')
   })
 
   constructor(
@@ -35,7 +36,7 @@ export class TicketEntryComponent implements OnInit {
   }
 
   onSubmit(){
-    this.openDialog();
+    if(this.ticketForm.valid) this.openDialog();
   }
 
   toggled(){
@@ -61,7 +62,14 @@ export class TicketEntryComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result) console.log("Send the data");
+      this.loading = true;
+      if(result){
+        console.log("Sending the data");
+        if(this.service.sendTicket(result)){
+          this.onCancel();
+          this.loading = false;
+        }
+      }
       else console.log("DONT SEND");      
     });
   }

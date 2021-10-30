@@ -1,6 +1,9 @@
-.end {
-    align-content: flex-end;
+h2{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px dotted blue;
 }
-.start {
-    align-content: flex-start;
+h1{
+    display:flex;
+    align-items: center;
 }

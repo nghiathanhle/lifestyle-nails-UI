@@ -17,7 +17,6 @@ export interface TicketDialogData {
 })
 
 export class TicketDialogComponent{
-
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: TicketDialogData,
     public dialogRef: MatDialogRef<TicketDialogComponent>
@@ -33,5 +32,4 @@ export class TicketDialogComponent{
   onNoClick(): void {
     this.dialogRef.close();
   }
-
 }
