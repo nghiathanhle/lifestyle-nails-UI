@@ -33,6 +33,7 @@ export class TicketEntryComponent implements OnInit {
     this.service.getTechniciansAndStoreToLocalStorage();
     //retrieving from local storage
     this.users = JSON.parse(localStorage.getItem('users'));
+    // console.log(this.users);
   }
 
   onSubmit(){
@@ -62,16 +63,25 @@ export class TicketEntryComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.loading = true;
       if(result){
         console.log("Sending the data");
-        if(this.service.sendTicket(result)){
-          this.onCancel();
+        this.changeLoading(true);
+        let res = this.service.sendTicket(result);
+        console.log(res);
+        
+        if(res){
+          this.ticketForm.reset();
+          this.changeLoading(false);
           this.loading = false;
         }
       }
       else console.log("DONT SEND");      
     });
+  }
+
+  //changing the loading state
+  changeLoading(state: boolean){
+    this.loading = state;
   }
 
   //Getters for the validators

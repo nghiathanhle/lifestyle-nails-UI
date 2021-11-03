@@ -13,14 +13,14 @@
                   <div *ngIf="getPerson().invalid && getPerson().touched">Name required</div> 
                 </mat-form-field>
               </div>
-              <div>
+              <!-- <div>
                 <mat-form-field appearance="fill" class="inputField">
                   <mat-label>Working With:</mat-label>
                   <mat-select formControlName="workingWith" name="workingWith">
-                    <mat-option *ngFor="let user of users" [value]="user.fname">{{user.fname}}</mat-option>
+                    <mat-option *ngFor="let user of filteredUsers" [value]="user.fname">{{user.fname}}</mat-option>
                   </mat-select>
                 </mat-form-field>
-              </div>
+              </div> -->
               <div>
                 <mat-form-field appearance="fill" class="inputField required" aria-required="true">
                   <mat-label>Price</mat-label>
