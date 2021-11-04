@@ -1,0 +1,43 @@
+<div class="horizontal">
+    <div class="divide">
+        <mat-card class="demo-inline-calendar-card">
+            <mat-card-title>Day Total</mat-card-title>
+            <div>
+                <mat-form-field appearance="fill" class="inputField required" aria-required="true">
+                  <mat-label>Name:</mat-label>
+                  <mat-select [(value)]="selectedPerson" (selectionChange)="personChange($event)">
+                    <mat-option *ngFor="let user of users" [value]="user.fname">{{user.fname}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+            </div>
+            <mat-calendar (selectedChange)="onDateChange($event)"></mat-calendar>
+        </mat-card>
+    </div>
+    <div class="divide">
+        <h2 class="text">
+            <span *ngIf="selectedPerson">{{selectedPerson}}:     {{selected}}</span>
+            <span *ngIf="!selectedPerson">Please select a person and Date</span>
+        </h2>
+
+        <table mat-table [dataSource]="tickets" class="mat-elevation-z8">
+            <!-- Item Column -->
+            <ng-container matColumnDef="price">
+              <th mat-header-cell *matHeaderCellDef> Price </th>
+              <td mat-cell *matCellDef="let ticket"> {{ticket.price}} </td>
+              <td mat-footer-cell *matFooterCellDef> {{getTotalCost() | currency}} </td>
+            </ng-container>
+          
+            <!-- Cost Column -->
+            <ng-container matColumnDef="tip">
+              <th mat-header-cell *matHeaderCellDef> Tip </th>
+              <td mat-cell *matCellDef="let ticket"> {{ticket.tip}} </td>
+              <td mat-footer-cell *matFooterCellDef> {{getTotalTip() | currency}} </td>
+            </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+          </table>
+          
+    </div>
+</div>

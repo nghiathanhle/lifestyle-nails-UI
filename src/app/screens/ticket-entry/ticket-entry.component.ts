@@ -71,6 +71,7 @@ export class TicketEntryComponent implements OnInit {
         
         if(res){
           this.ticketForm.reset();
+          this.onCancel();
           this.changeLoading(false);
           this.loading = false;
         }
