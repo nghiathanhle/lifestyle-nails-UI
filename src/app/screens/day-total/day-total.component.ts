@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 //import TicketService from '../../services/ticket.service';
 import { TicketServicesService } from 'src/app/services/ticket-services.service';
+import { interval, Subscription } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+
+import { PersonPinDialogComponent } from '../person-pin-dialog/person-pin-dialog.component';
 
 //creating a data model to be displayed
 interface Transaction {
@@ -15,21 +19,27 @@ interface Transaction {
 })
 export class DayTotalComponent implements OnInit {
 
-  displayedColumns: string[] = ['price', 'tip'];
-  selected: any;;
+  subscription: Subscription;
+  source : any;
+  displayedColumns: string[] = ['price', 'tip', 'transaction'];
+  pin: number;
+  invalidPin: boolean = false;
+  selected: any;
   selectedPerson:any;
   users = [];
   searchDate : string;
   tickets = [];
-  constructor(private service: TicketServicesService) { }
+  correctPin: boolean;
+  constructor(private service: TicketServicesService,
+    private dialog: MatDialog) {}
+
   ngOnInit(): void {
     //get users from local storage
     this.users = JSON.parse(localStorage.getItem("users"));
-    console.log(this.users);
-    
     // get current date and store it into searchDate
     // format searchDate using formatDate function
     this.searchDate = this.formatDate(new Date());
+    this.correctPin = false;
   }
 
   //call getTickets function from service, sending searchDate and selectedPerson.emId as parameters
@@ -51,18 +61,56 @@ export class DayTotalComponent implements OnInit {
   //set searchDate to current date, format it using formatDate function
   //call getTickets function
   personChange(event: any) {
+    // console.log(this.openDialog());
     //get password of selectedPerson from list of users
     let tempPerson = this.users.find(x => x.fname == event.value);
-    console.log(tempPerson);
+    // let result = this.openDialog();
     
-    //changed selected to current date with format mm-dd-yyyy
-    this.selected = (new Date()).getMonth() + 1 + "-" + (new Date()).getDate() + "-" + (new Date()).getFullYear();
-    this.selectedPerson = event.value;
-    this.tickets = [];
-    this.searchDate = this.formatDate(new Date());
-    this.getTickets();
+    // if(this.openDialog().localeCompare(tempPerson.code) == 0){
+      // console.log("correct pin");
+      
+      // this.correctPin = true;
+      //changed selected to current date with format mm-dd-yyyy
+      this.selected = (new Date()).getMonth() + 1 + "-" + (new Date()).getDate() + "-" + (new Date()).getFullYear();
+      this.selectedPerson = event.value;
+      this.tickets = [];
+      this.searchDate = this.formatDate(new Date());
+      this.getTickets();
+    // }else{
+    //   console.log("incorrect pin");
+    // }
+  }
+
+  openDialog(): string {
+    let result = '';
+    const dialogRef = this.dialog.open(PersonPinDialogComponent, {
+      width: '400px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      result = result;
+    });
+
+    return result;
   }
     
+  //pinChange function
+  //assign input to pin
+  //compare pin with password of selectedPerson from list of users
+  pinChange(event: any) {
+    // this.pin = event.value;
+
+    // //get password of selectedPerson from list of users
+    // let tempPerson = this.users.find(x => x.fname == event.value);
+    // console.log(tempPerson);
+    // //compare pin with password of selectedPerson from list of users
+    // if (tempPerson.password == this.pin) {
+    //   this.pin = null;
+    //   this.getTickets();
+    // }else{
+    //   this.invalidPin = true;
+    // }
+  }
 
   //call function from service.getTickets, sending searchDate and selectedPerson.emId as parameters
   async getTickets() {
@@ -71,6 +119,8 @@ export class DayTotalComponent implements OnInit {
     this.tickets = [];
     let temp  = await this.service.getTickets(this.searchDate, tempPerson.emId);
     this.tickets = temp.data;
+    this.source = interval(60000);//setting to clear data every 60 seconds
+    this.subscription = this.source.subscribe(val => this.clearData());//clear data every 60 seconds, calling this here to insure there is enough time
   }
   
   //format date to yyyy_mm_dd
@@ -104,4 +154,14 @@ export class DayTotalComponent implements OnInit {
     return total;
   }
 
+  clearData(){
+    this.tickets = [];
+    this.selectedPerson = "";
+    this.selected = "";
+    this.subscription.unsubscribe();
+    this.source = null;
+    this.correctPin = false;
+  }
+
 }
+

@@ -64,11 +64,8 @@ export class TicketEntryComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result){
-        console.log("Sending the data");
         this.changeLoading(true);
         let res = this.service.sendTicket(result);
-        console.log(res);
-        
         if(res){
           this.ticketForm.reset();
           this.onCancel();

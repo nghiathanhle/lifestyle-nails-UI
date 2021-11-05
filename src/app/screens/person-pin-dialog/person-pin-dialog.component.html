@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Please Enter Your Pin</h1>
+<div mat-dialog-content>
+    <!-- mat input for pin -->
+    <mat-form-field>
+        <input matInput type="password" maxlength="4" [(ngModel)]="pin" name="pin" required>
+    </mat-form-field>
+</div>
+<div mat-dialog-actions align="center">
+    <button mat-button (click)="onCancelClick()">Cancel</button>
+    <button mat-button [mat-dialog-close]="pin">Submit</button>
+</div>

@@ -1,0 +1,8 @@
+<mat-tab-group animationDuration="800ms" mat-stretch-tabs (selectedIndexChange)="tabChanged($event)"> 
+    <mat-tab label="Ticket Entry">
+        <app-ticket-entry></app-ticket-entry>
+    </mat-tab>
+    <mat-tab label="Check Total" tabindex="1" (blur)="onBlur()">
+        <app-day-total></app-day-total> 
+    </mat-tab>
+</mat-tab-group>

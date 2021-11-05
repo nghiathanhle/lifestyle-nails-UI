@@ -10,7 +10,9 @@
                   </mat-select>
                 </mat-form-field>
             </div>
+            <!-- <mat-calendar *ngIf="correctPin" (selectedChange)="onDateChange($event)"></mat-calendar> -->
             <mat-calendar (selectedChange)="onDateChange($event)"></mat-calendar>
+
         </mat-card>
     </div>
     <div class="divide">
@@ -34,6 +36,13 @@
               <td mat-footer-cell *matFooterCellDef> {{getTotalTip() | currency}} </td>
             </ng-container>
           
+            <!-- Cost Column -->
+            <ng-container matColumnDef="transaction">
+                <th mat-header-cell *matHeaderCellDef> Transaction </th>
+                <td mat-cell *matCellDef="let ticket"> {{ticket.transaction? ticket.transaction: 'Cash' }} </td>
+                <td mat-footer-cell *matFooterCellDef></td>
+            </ng-container>
+
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
