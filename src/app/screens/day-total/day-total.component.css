@@ -46,6 +46,17 @@ ng-container{
     .text{
         font-size: 15px;
     }
+    .demo-inline-calendar-card {
+        width: 80vw;
+    }
+    table {
+        width: 80vw;
+    }
+
+    .divide{
+        margin: 5px;
+        padding: 10px;
+    }
 }
 
 .divide{
