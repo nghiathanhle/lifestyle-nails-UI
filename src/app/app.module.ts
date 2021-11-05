@@ -4,7 +4,6 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TicketEntryComponent } from './screens/ticket-entry/ticket-entry.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatButtonModule } from '@angular/material/button';
@@ -15,15 +14,28 @@ import { MatInputModule } from '@angular/material/input';
 import {MatRadioModule} from '@angular/material/radio';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import { TicketDialogComponent } from './screens/ticket-dialog/ticket-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatTableModule} from '@angular/material/table';
+import {MatIconModule} from '@angular/material/icon';
+import {MatTabsModule} from '@angular/material/tabs';
+
+import { TicketEntryComponent } from './screens/ticket-entry/ticket-entry.component';
+import { TicketDialogComponent } from './screens/ticket-dialog/ticket-dialog.component';
+import { DayTotalComponent } from './screens/day-total/day-total.component';
+import { TechnicianActionsComponent } from './screens/technician-actions/technician-actions.component';
+import { PersonPinDialogComponent } from './screens/person-pin-dialog/person-pin-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TicketEntryComponent,
     TicketDialogComponent,
+    DayTotalComponent,
+    TechnicianActionsComponent,
+    PersonPinDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,7 +53,12 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     ReactiveFormsModule,
     MatSlideToggleModule,
     MatDialogModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatTableModule,
+    MatIconModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
