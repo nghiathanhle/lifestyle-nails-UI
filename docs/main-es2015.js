@@ -263,6 +263,7 @@ class DayTotalComponent {
         // format searchDate using formatDate function
         this.searchDate = this.formatDate(new Date());
         this.correctPin = false;
+        this.code = "";
     }
     //call getTickets function from service, sending searchDate and selectedPerson.emId as parameters
     //change selected date
@@ -284,45 +285,36 @@ class DayTotalComponent {
         // console.log(this.openDialog());
         //get password of selectedPerson from list of users
         let tempPerson = this.users.find(x => x.fname == event.value);
-        // let result = this.openDialog();
+        this.openDialog(tempPerson.code, event);
         // if(this.openDialog().localeCompare(tempPerson.code) == 0){
         // console.log("correct pin");
         // this.correctPin = true;
         //changed selected to current date with format mm-dd-yyyy
-        this.selected = (new Date()).getMonth() + 1 + "-" + (new Date()).getDate() + "-" + (new Date()).getFullYear();
-        this.selectedPerson = event.value;
-        this.tickets = [];
-        this.searchDate = this.formatDate(new Date());
-        this.getTickets();
+        // this.selected = (new Date()).getMonth() + 1 + "-" + (new Date()).getDate() + "-" + (new Date()).getFullYear();
+        // this.selectedPerson = event.value;
+        // this.tickets = [];
+        // this.searchDate = this.formatDate(new Date());
+        // this.getTickets();
         // }else{
         //   console.log("incorrect pin");
         // }
     }
-    openDialog() {
-        let result = '';
+    openDialog(code, event) {
+        this.clearData();
+        var res = '';
         const dialogRef = this.dialog.open(_person_pin_dialog_person_pin_dialog_component__WEBPACK_IMPORTED_MODULE_3__["PersonPinDialogComponent"], {
             width: '400px'
         });
         dialogRef.afterClosed().subscribe(result => {
-            result = result;
+            res = result;
+            if (res == code) {
+                this.selected = (new Date()).getMonth() + 1 + "-" + (new Date()).getDate() + "-" + (new Date()).getFullYear();
+                this.selectedPerson = event.value;
+                this.tickets = [];
+                this.searchDate = this.formatDate(new Date());
+                this.getTickets();
+            }
         });
-        return result;
-    }
-    //pinChange function
-    //assign input to pin
-    //compare pin with password of selectedPerson from list of users
-    pinChange(event) {
-        // this.pin = event.value;
-        // //get password of selectedPerson from list of users
-        // let tempPerson = this.users.find(x => x.fname == event.value);
-        // console.log(tempPerson);
-        // //compare pin with password of selectedPerson from list of users
-        // if (tempPerson.password == this.pin) {
-        //   this.pin = null;
-        //   this.getTickets();
-        // }else{
-        //   this.invalidPin = true;
-        // }
     }
     //call function from service.getTickets, sending searchDate and selectedPerson.emId as parameters
     getTickets() {
@@ -368,7 +360,8 @@ class DayTotalComponent {
         this.tickets = [];
         this.selectedPerson = "";
         this.selected = "";
-        this.subscription.unsubscribe();
+        if (this.subscription)
+            this.subscription.unsubscribe();
         this.source = null;
         this.correctPin = false;
     }

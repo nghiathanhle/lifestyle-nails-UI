@@ -539,6 +539,7 @@
 
             this.searchDate = this.formatDate(new Date());
             this.correctPin = false;
+            this.code = "";
           } //call getTickets function from service, sending searchDate and selectedPerson.emId as parameters
           //change selected date
 
@@ -565,55 +566,49 @@
             //get password of selectedPerson from list of users
             var tempPerson = this.users.find(function (x) {
               return x.fname == event.value;
-            }); // let result = this.openDialog();
-            // if(this.openDialog().localeCompare(tempPerson.code) == 0){
+            });
+            this.openDialog(tempPerson.code, event); // if(this.openDialog().localeCompare(tempPerson.code) == 0){
             // console.log("correct pin");
             // this.correctPin = true;
             //changed selected to current date with format mm-dd-yyyy
-
-            this.selected = new Date().getMonth() + 1 + "-" + new Date().getDate() + "-" + new Date().getFullYear();
-            this.selectedPerson = event.value;
-            this.tickets = [];
-            this.searchDate = this.formatDate(new Date());
-            this.getTickets(); // }else{
+            // this.selected = (new Date()).getMonth() + 1 + "-" + (new Date()).getDate() + "-" + (new Date()).getFullYear();
+            // this.selectedPerson = event.value;
+            // this.tickets = [];
+            // this.searchDate = this.formatDate(new Date());
+            // this.getTickets();
+            // }else{
             //   console.log("incorrect pin");
             // }
           }
         }, {
           key: "openDialog",
-          value: function openDialog() {
-            var result = '';
+          value: function openDialog(code, event) {
+            var _this = this;
+
+            this.clearData();
+            var res = '';
             var dialogRef = this.dialog.open(_person_pin_dialog_person_pin_dialog_component__WEBPACK_IMPORTED_MODULE_3__["PersonPinDialogComponent"], {
               width: '400px'
             });
             dialogRef.afterClosed().subscribe(function (result) {
-              result = result;
-            });
-            return result;
-          } //pinChange function
-          //assign input to pin
-          //compare pin with password of selectedPerson from list of users
+              res = result;
 
-        }, {
-          key: "pinChange",
-          value: function pinChange(event) {// this.pin = event.value;
-            // //get password of selectedPerson from list of users
-            // let tempPerson = this.users.find(x => x.fname == event.value);
-            // console.log(tempPerson);
-            // //compare pin with password of selectedPerson from list of users
-            // if (tempPerson.password == this.pin) {
-            //   this.pin = null;
-            //   this.getTickets();
-            // }else{
-            //   this.invalidPin = true;
-            // }
+              if (res == code) {
+                _this.selected = new Date().getMonth() + 1 + "-" + new Date().getDate() + "-" + new Date().getFullYear();
+                _this.selectedPerson = event.value;
+                _this.tickets = [];
+                _this.searchDate = _this.formatDate(new Date());
+
+                _this.getTickets();
+              }
+            });
           } //call function from service.getTickets, sending searchDate and selectedPerson.emId as parameters
 
         }, {
           key: "getTickets",
           value: function getTickets() {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-              var _this = this;
+              var _this2 = this;
 
               var tempPerson, temp;
               return regeneratorRuntime.wrap(function _callee$(_context) {
@@ -622,7 +617,7 @@
                     case 0:
                       //get emId of selectedPerson from list of users
                       tempPerson = this.users.find(function (x) {
-                        return x.fname == _this.selectedPerson;
+                        return x.fname == _this2.selectedPerson;
                       });
                       this.tickets = [];
                       _context.next = 4;
@@ -634,7 +629,7 @@
                       this.source = Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["interval"])(60000); //setting to clear data every 60 seconds
 
                       this.subscription = this.source.subscribe(function (val) {
-                        return _this.clearData();
+                        return _this2.clearData();
                       }); //clear data every 60 seconds, calling this here to insure there is enough time
 
                     case 8:
@@ -691,7 +686,7 @@
             this.tickets = [];
             this.selectedPerson = "";
             this.selected = "";
-            this.subscription.unsubscribe();
+            if (this.subscription) this.subscription.unsubscribe();
             this.source = null;
             this.correctPin = false;
           }
@@ -2016,7 +2011,7 @@
         }, {
           key: "openDialog",
           value: function openDialog() {
-            var _this2 = this;
+            var _this3 = this;
 
             var dialogRef = this.dialog.open(_ticket_dialog_ticket_dialog_component__WEBPACK_IMPORTED_MODULE_2__["TicketDialogComponent"], {
               width: '400px',
@@ -2031,18 +2026,18 @@
             });
             dialogRef.afterClosed().subscribe(function (result) {
               if (result) {
-                _this2.changeLoading(true);
+                _this3.changeLoading(true);
 
-                var res = _this2.service.sendTicket(result);
+                var res = _this3.service.sendTicket(result);
 
                 if (res) {
-                  _this2.ticketForm.reset();
+                  _this3.ticketForm.reset();
 
-                  _this2.onCancel();
+                  _this3.onCancel();
 
-                  _this2.changeLoading(false);
+                  _this3.changeLoading(false);
 
-                  _this2.loading = false;
+                  _this3.loading = false;
                 }
               } else console.log("DONT SEND");
             });
