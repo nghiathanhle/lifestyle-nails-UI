@@ -101,24 +101,6 @@ export class DayTotalComponent implements OnInit {
       }
     });
   }
-    
-  //pinChange function
-  //assign input to pin
-  //compare pin with password of selectedPerson from list of users
-  pinChange(event: any) {
-    // this.pin = event.value;
-
-    // //get password of selectedPerson from list of users
-    // let tempPerson = this.users.find(x => x.fname == event.value);
-    // console.log(tempPerson);
-    // //compare pin with password of selectedPerson from list of users
-    // if (tempPerson.password == this.pin) {
-    //   this.pin = null;
-    //   this.getTickets();
-    // }else{
-    //   this.invalidPin = true;
-    // }
-  }
 
   //call function from service.getTickets, sending searchDate and selectedPerson.emId as parameters
   async getTickets() {
