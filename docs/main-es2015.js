@@ -1074,8 +1074,18 @@ class TicketEntryComponent {
         dialogRef.afterClosed().subscribe(result => {
             if (result) {
                 this.changeLoading(true);
-                let res = this.service.sendTicket(result);
-                if (res) {
+                let validToSubmit = this.validateToSend();
+                if (validToSubmit) {
+                    let res = this.service.sendTicket(result);
+                    if (res) {
+                        this.ticketForm.reset();
+                        this.onCancel();
+                        this.changeLoading(false);
+                        this.loading = false;
+                    }
+                }
+                else {
+                    alert("You can only submit tickets between 10am and 8:30pm");
                     this.ticketForm.reset();
                     this.onCancel();
                     this.changeLoading(false);
@@ -1085,6 +1095,16 @@ class TicketEntryComponent {
             else
                 console.log("DONT SEND");
         });
+    }
+    validateToSend() {
+        //check if current time is between 10am and 8:30pm
+        let currentTime = new Date();
+        let currentHour = currentTime.getHours();
+        //check if current time is between 10am and 8:30pm
+        if (currentHour >= 10 && currentHour <= 21) {
+            return true;
+        }
+        return false;
     }
     //changing the loading state
     changeLoading(state) {

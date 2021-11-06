@@ -2028,9 +2028,23 @@
               if (result) {
                 _this3.changeLoading(true);
 
-                var res = _this3.service.sendTicket(result);
+                var validToSubmit = _this3.validateToSend();
 
-                if (res) {
+                if (validToSubmit) {
+                  var res = _this3.service.sendTicket(result);
+
+                  if (res) {
+                    _this3.ticketForm.reset();
+
+                    _this3.onCancel();
+
+                    _this3.changeLoading(false);
+
+                    _this3.loading = false;
+                  }
+                } else {
+                  alert("You can only submit tickets between 10am and 8:30pm");
+
                   _this3.ticketForm.reset();
 
                   _this3.onCancel();
@@ -2041,6 +2055,19 @@
                 }
               } else console.log("DONT SEND");
             });
+          }
+        }, {
+          key: "validateToSend",
+          value: function validateToSend() {
+            //check if current time is between 10am and 8:30pm
+            var currentTime = new Date();
+            var currentHour = currentTime.getHours(); //check if current time is between 10am and 8:30pm
+
+            if (currentHour >= 10 && currentHour <= 21) {
+              return true;
+            }
+
+            return false;
           } //changing the loading state
 
         }, {
