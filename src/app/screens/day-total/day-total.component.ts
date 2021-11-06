@@ -30,6 +30,7 @@ export class DayTotalComponent implements OnInit {
   searchDate : string;
   tickets = [];
   correctPin: boolean;
+  code : string;
   constructor(private service: TicketServicesService,
     private dialog: MatDialog) {}
 
@@ -40,6 +41,7 @@ export class DayTotalComponent implements OnInit {
     // format searchDate using formatDate function
     this.searchDate = this.formatDate(new Date());
     this.correctPin = false;
+    this.code = "";
   }
 
   //call getTickets function from service, sending searchDate and selectedPerson.emId as parameters
@@ -64,34 +66,40 @@ export class DayTotalComponent implements OnInit {
     // console.log(this.openDialog());
     //get password of selectedPerson from list of users
     let tempPerson = this.users.find(x => x.fname == event.value);
-    // let result = this.openDialog();
+    this.openDialog(tempPerson.code, event);
     
+  
     // if(this.openDialog().localeCompare(tempPerson.code) == 0){
       // console.log("correct pin");
       
       // this.correctPin = true;
       //changed selected to current date with format mm-dd-yyyy
-      this.selected = (new Date()).getMonth() + 1 + "-" + (new Date()).getDate() + "-" + (new Date()).getFullYear();
-      this.selectedPerson = event.value;
-      this.tickets = [];
-      this.searchDate = this.formatDate(new Date());
-      this.getTickets();
+      // this.selected = (new Date()).getMonth() + 1 + "-" + (new Date()).getDate() + "-" + (new Date()).getFullYear();
+      // this.selectedPerson = event.value;
+      // this.tickets = [];
+      // this.searchDate = this.formatDate(new Date());
+      // this.getTickets();
     // }else{
     //   console.log("incorrect pin");
     // }
   }
 
-  openDialog(): string {
-    let result = '';
+  openDialog(code: any, event: any): void {
+    this.clearData();
+    var res = '';
     const dialogRef = this.dialog.open(PersonPinDialogComponent, {
       width: '400px'
     });
-
     dialogRef.afterClosed().subscribe(result => {
-      result = result;
+      res = result;
+      if(res == code){
+        this.selected = (new Date()).getMonth() + 1 + "-" + (new Date()).getDate() + "-" + (new Date()).getFullYear();
+        this.selectedPerson = event.value;
+        this.tickets = [];
+        this.searchDate = this.formatDate(new Date());
+        this.getTickets();
+      }
     });
-
-    return result;
   }
     
   //pinChange function
@@ -158,7 +166,7 @@ export class DayTotalComponent implements OnInit {
     this.tickets = [];
     this.selectedPerson = "";
     this.selected = "";
-    this.subscription.unsubscribe();
+    if(this.subscription) this.subscription.unsubscribe();
     this.source = null;
     this.correctPin = false;
   }
