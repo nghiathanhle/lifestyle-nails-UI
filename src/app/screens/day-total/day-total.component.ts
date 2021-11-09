@@ -109,8 +109,8 @@ export class DayTotalComponent implements OnInit {
     this.tickets = [];
     let temp  = await this.service.getTickets(this.searchDate, tempPerson.emId);
     this.tickets = temp.data;
-    this.source = interval(60000);//setting to clear data every 60 seconds
-    this.subscription = this.source.subscribe(val => this.clearData());//clear data every 60 seconds, calling this here to insure there is enough time
+    // this.source = interval(60000);//setting to clear data every 60 seconds
+    // this.subscription = this.source.subscribe(val => this.clearData());//clear data every 60 seconds, calling this here to insure there is enough time
   }
   
   //format date to yyyy_mm_dd
@@ -148,7 +148,7 @@ export class DayTotalComponent implements OnInit {
     this.tickets = [];
     this.selectedPerson = "";
     this.selected = "";
-    if(this.subscription) this.subscription.unsubscribe();
+    // if(this.subscription) this.subscription.unsubscribe();
     this.source = null;
     this.correctPin = false;
   }
