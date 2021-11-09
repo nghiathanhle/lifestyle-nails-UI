@@ -258,67 +258,61 @@
       /* harmony import */
 
 
-      var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! rxjs */
-      "qCKp");
-      /* harmony import */
-
-
-      var _person_pin_dialog_person_pin_dialog_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      var _person_pin_dialog_person_pin_dialog_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! ../person-pin-dialog/person-pin-dialog.component */
       "BDCX");
       /* harmony import */
 
 
-      var src_app_services_ticket_services_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      var src_app_services_ticket_services_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! src/app/services/ticket-services.service */
       "PuZ3");
       /* harmony import */
 
 
-      var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/material/dialog */
       "0IaG");
       /* harmony import */
 
 
-      var _angular_material_card__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      var _angular_material_card__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/material/card */
       "Wp6s");
       /* harmony import */
 
 
-      var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/material/form-field */
       "kmnG");
       /* harmony import */
 
 
-      var _angular_material_select__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+      var _angular_material_select__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/material/select */
       "d3UM");
       /* harmony import */
 
 
-      var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+      var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/common */
       "ofXK");
       /* harmony import */
 
 
-      var _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+      var _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/material/datepicker */
       "iadO");
       /* harmony import */
 
 
-      var _angular_material_table__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
+      var _angular_material_table__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/material/table */
       "+0xr");
       /* harmony import */
 
 
-      var _angular_material_core__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
+      var _angular_material_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! @angular/material/core */
       "FKr1");
 
@@ -587,7 +581,7 @@
 
             this.clearData();
             var res = '';
-            var dialogRef = this.dialog.open(_person_pin_dialog_person_pin_dialog_component__WEBPACK_IMPORTED_MODULE_3__["PersonPinDialogComponent"], {
+            var dialogRef = this.dialog.open(_person_pin_dialog_person_pin_dialog_component__WEBPACK_IMPORTED_MODULE_2__["PersonPinDialogComponent"], {
               width: '400px'
             });
             dialogRef.afterClosed().subscribe(function (result) {
@@ -625,14 +619,10 @@
 
                     case 4:
                       temp = _context.sent;
-                      this.tickets = temp.data;
-                      this.source = Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["interval"])(60000); //setting to clear data every 60 seconds
+                      this.tickets = temp.data; // this.source = interval(60000);//setting to clear data every 60 seconds
+                      // this.subscription = this.source.subscribe(val => this.clearData());//clear data every 60 seconds, calling this here to insure there is enough time
 
-                      this.subscription = this.source.subscribe(function (val) {
-                        return _this2.clearData();
-                      }); //clear data every 60 seconds, calling this here to insure there is enough time
-
-                    case 8:
+                    case 6:
                     case "end":
                       return _context.stop();
                   }
@@ -685,8 +675,8 @@
           value: function clearData() {
             this.tickets = [];
             this.selectedPerson = "";
-            this.selected = "";
-            if (this.subscription) this.subscription.unsubscribe();
+            this.selected = ""; // if(this.subscription) this.subscription.unsubscribe();
+
             this.source = null;
             this.correctPin = false;
           }
@@ -696,7 +686,7 @@
       }();
 
       DayTotalComponent.ɵfac = function DayTotalComponent_Factory(t) {
-        return new (t || DayTotalComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](src_app_services_ticket_services_service__WEBPACK_IMPORTED_MODULE_4__["TicketServicesService"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_5__["MatDialog"]));
+        return new (t || DayTotalComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](src_app_services_ticket_services_service__WEBPACK_IMPORTED_MODULE_3__["TicketServicesService"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_4__["MatDialog"]));
       };
 
       DayTotalComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({
@@ -846,8 +836,8 @@
             _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("matFooterRowDef", ctx.displayedColumns);
           }
         },
-        directives: [_angular_material_card__WEBPACK_IMPORTED_MODULE_6__["MatCard"], _angular_material_card__WEBPACK_IMPORTED_MODULE_6__["MatCardTitle"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_7__["MatFormField"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_7__["MatLabel"], _angular_material_select__WEBPACK_IMPORTED_MODULE_8__["MatSelect"], _angular_common__WEBPACK_IMPORTED_MODULE_9__["NgForOf"], _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_10__["MatCalendar"], _angular_common__WEBPACK_IMPORTED_MODULE_9__["NgIf"], _angular_material_table__WEBPACK_IMPORTED_MODULE_11__["MatTable"], _angular_material_table__WEBPACK_IMPORTED_MODULE_11__["MatColumnDef"], _angular_material_table__WEBPACK_IMPORTED_MODULE_11__["MatHeaderCellDef"], _angular_material_table__WEBPACK_IMPORTED_MODULE_11__["MatCellDef"], _angular_material_table__WEBPACK_IMPORTED_MODULE_11__["MatFooterCellDef"], _angular_material_table__WEBPACK_IMPORTED_MODULE_11__["MatHeaderRowDef"], _angular_material_table__WEBPACK_IMPORTED_MODULE_11__["MatRowDef"], _angular_material_table__WEBPACK_IMPORTED_MODULE_11__["MatFooterRowDef"], _angular_material_core__WEBPACK_IMPORTED_MODULE_12__["MatOption"], _angular_material_table__WEBPACK_IMPORTED_MODULE_11__["MatHeaderCell"], _angular_material_table__WEBPACK_IMPORTED_MODULE_11__["MatCell"], _angular_material_table__WEBPACK_IMPORTED_MODULE_11__["MatFooterCell"], _angular_material_table__WEBPACK_IMPORTED_MODULE_11__["MatHeaderRow"], _angular_material_table__WEBPACK_IMPORTED_MODULE_11__["MatRow"], _angular_material_table__WEBPACK_IMPORTED_MODULE_11__["MatFooterRow"]],
-        pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_9__["CurrencyPipe"]],
+        directives: [_angular_material_card__WEBPACK_IMPORTED_MODULE_5__["MatCard"], _angular_material_card__WEBPACK_IMPORTED_MODULE_5__["MatCardTitle"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_6__["MatFormField"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_6__["MatLabel"], _angular_material_select__WEBPACK_IMPORTED_MODULE_7__["MatSelect"], _angular_common__WEBPACK_IMPORTED_MODULE_8__["NgForOf"], _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_9__["MatCalendar"], _angular_common__WEBPACK_IMPORTED_MODULE_8__["NgIf"], _angular_material_table__WEBPACK_IMPORTED_MODULE_10__["MatTable"], _angular_material_table__WEBPACK_IMPORTED_MODULE_10__["MatColumnDef"], _angular_material_table__WEBPACK_IMPORTED_MODULE_10__["MatHeaderCellDef"], _angular_material_table__WEBPACK_IMPORTED_MODULE_10__["MatCellDef"], _angular_material_table__WEBPACK_IMPORTED_MODULE_10__["MatFooterCellDef"], _angular_material_table__WEBPACK_IMPORTED_MODULE_10__["MatHeaderRowDef"], _angular_material_table__WEBPACK_IMPORTED_MODULE_10__["MatRowDef"], _angular_material_table__WEBPACK_IMPORTED_MODULE_10__["MatFooterRowDef"], _angular_material_core__WEBPACK_IMPORTED_MODULE_11__["MatOption"], _angular_material_table__WEBPACK_IMPORTED_MODULE_10__["MatHeaderCell"], _angular_material_table__WEBPACK_IMPORTED_MODULE_10__["MatCell"], _angular_material_table__WEBPACK_IMPORTED_MODULE_10__["MatFooterCell"], _angular_material_table__WEBPACK_IMPORTED_MODULE_10__["MatHeaderRow"], _angular_material_table__WEBPACK_IMPORTED_MODULE_10__["MatRow"], _angular_material_table__WEBPACK_IMPORTED_MODULE_10__["MatFooterRow"]],
+        pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_8__["CurrencyPipe"]],
         styles: [".demo-inline-calendar-card[_ngcontent-%COMP%] {\n    width: 80%;\n  }\n\n.text[_ngcontent-%COMP%]{\n    font-size: 20px;\n    font-weight: bold;\n}\n\n.inputField[_ngcontent-%COMP%]{\n    width: 100%;\n    height: 40px;\n    border-radius: 5px;\n    padding-left: 10px;\n    font-size: 20px;\n    font-weight: bold;\n}\n\n.horizontal[_ngcontent-%COMP%]{\n    display: flex;\n    justify-content: space-around;\n}\n\ntable[_ngcontent-%COMP%] {\n  width: 100%;\n  margin-top: 20px;\n  font-size: 20px;\n}\n\ntr.mat-footer-row[_ngcontent-%COMP%] {\n  font-weight: bold;\n}\n\ntd[_ngcontent-%COMP%]{\n    font-size: large;\n}\n\nng-container[_ngcontent-%COMP%]{\n    display: flex;\n    justify-content: space-around;\n}\n\n.divide[_ngcontent-%COMP%]{\n    width: 50%;\n}\n\n@media screen and (max-width:500px) {\n    .demo-inline-calendar-card[_ngcontent-%COMP%] {\n        width: 100%;\n        font-size: medium;\n      }\n    \n    .text[_ngcontent-%COMP%]{\n        font-size: 15px;\n    }\n    \n    .inputField[_ngcontent-%COMP%]{\n        width: 100%;\n        height: 20px;\n        border-radius: 5px;\n        font-size: 20px;\n        font-weight: bold;\n    }\n    \n    .horizontal[_ngcontent-%COMP%]{\n        display: flex;\n        flex-direction: column;\n    }\n    table[_ngcontent-%COMP%] {\n      width: 100%;\n      margin-top: 10px;\n      font-size: 10px;\n    }\n    \n    tr.mat-footer-row[_ngcontent-%COMP%] {\n      font-weight: bold;\n    }\n    \n    td[_ngcontent-%COMP%]{\n        font-size: medium;\n    }\n    \n    .divide[_ngcontent-%COMP%]{\n        width: 90%;\n    }\n    .personText[_ngcontent-%COMP%]{\n        margin-left: 20px;\n    }\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImRheS10b3RhbC9kYXktdG90YWwuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLFVBQVU7RUFDWjs7QUFFRjtJQUNJLGVBQWU7SUFDZixpQkFBaUI7QUFDckI7O0FBRUE7SUFDSSxXQUFXO0lBQ1gsWUFBWTtJQUNaLGtCQUFrQjtJQUNsQixrQkFBa0I7SUFDbEIsZUFBZTtJQUNmLGlCQUFpQjtBQUNyQjs7QUFFQTtJQUNJLGFBQWE7SUFDYiw2QkFBNkI7QUFDakM7O0FBQ0E7RUFDRSxXQUFXO0VBQ1gsZ0JBQWdCO0VBQ2hCLGVBQWU7QUFDakI7O0FBRUE7RUFDRSxpQkFBaUI7QUFDbkI7O0FBRUE7SUFDSSxnQkFBZ0I7QUFDcEI7O0FBRUE7SUFDSSxhQUFhO0lBQ2IsNkJBQTZCO0FBQ2pDOztBQUVBO0lBQ0ksVUFBVTtBQUNkOztBQUdBO0lBQ0k7UUFDSSxXQUFXO1FBQ1gsaUJBQWlCO01BQ25COztJQUVGO1FBQ0ksZUFBZTtJQUNuQjs7SUFFQTtRQUNJLFdBQVc7UUFDWCxZQUFZO1FBQ1osa0JBQWtCO1FBQ2xCLGVBQWU7UUFDZixpQkFBaUI7SUFDckI7O0lBRUE7UUFDSSxhQUFhO1FBQ2Isc0JBQXNCO0lBQzFCO0lBQ0E7TUFDRSxXQUFXO01BQ1gsZ0JBQWdCO01BQ2hCLGVBQWU7SUFDakI7O0lBRUE7TUFDRSxpQkFBaUI7SUFDbkI7O0lBRUE7UUFDSSxpQkFBaUI7SUFDckI7O0lBRUE7UUFDSSxVQUFVO0lBQ2Q7SUFDQTtRQUNJLGlCQUFpQjtJQUNyQjtBQUNKIiwiZmlsZSI6ImRheS10b3RhbC9kYXktdG90YWwuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5kZW1vLWlubGluZS1jYWxlbmRhci1jYXJkIHtcbiAgICB3aWR0aDogODAlO1xuICB9XG5cbi50ZXh0e1xuICAgIGZvbnQtc2l6ZTogMjBweDtcbiAgICBmb250LXdlaWdodDogYm9sZDtcbn1cblxuLmlucHV0RmllbGR7XG4gICAgd2lkdGg6IDEwMCU7XG4gICAgaGVpZ2h0OiA0MHB4O1xuICAgIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgICBwYWRkaW5nLWxlZnQ6IDEwcHg7XG4gICAgZm9udC1zaXplOiAyMHB4O1xuICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xufVxuXG4uaG9yaXpvbnRhbHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGp1c3RpZnktY29udGVudDogc3BhY2UtYXJvdW5kO1xufVxudGFibGUge1xuICB3aWR0aDogMTAwJTtcbiAgbWFyZ2luLXRvcDogMjBweDtcbiAgZm9udC1zaXplOiAyMHB4O1xufVxuXG50ci5tYXQtZm9vdGVyLXJvdyB7XG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xufVxuXG50ZHtcbiAgICBmb250LXNpemU6IGxhcmdlO1xufVxuXG5uZy1jb250YWluZXJ7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWFyb3VuZDtcbn1cblxuLmRpdmlkZXtcbiAgICB3aWR0aDogNTAlO1xufVxuXG5cbkBtZWRpYSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6NTAwcHgpIHtcbiAgICAuZGVtby1pbmxpbmUtY2FsZW5kYXItY2FyZCB7XG4gICAgICAgIHdpZHRoOiAxMDAlO1xuICAgICAgICBmb250LXNpemU6IG1lZGl1bTtcbiAgICAgIH1cbiAgICBcbiAgICAudGV4dHtcbiAgICAgICAgZm9udC1zaXplOiAxNXB4O1xuICAgIH1cbiAgICBcbiAgICAuaW5wdXRGaWVsZHtcbiAgICAgICAgd2lkdGg6IDEwMCU7XG4gICAgICAgIGhlaWdodDogMjBweDtcbiAgICAgICAgYm9yZGVyLXJhZGl1czogNXB4O1xuICAgICAgICBmb250LXNpemU6IDIwcHg7XG4gICAgICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xuICAgIH1cbiAgICBcbiAgICAuaG9yaXpvbnRhbHtcbiAgICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgICAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcbiAgICB9XG4gICAgdGFibGUge1xuICAgICAgd2lkdGg6IDEwMCU7XG4gICAgICBtYXJnaW4tdG9wOiAxMHB4O1xuICAgICAgZm9udC1zaXplOiAxMHB4O1xuICAgIH1cbiAgICBcbiAgICB0ci5tYXQtZm9vdGVyLXJvdyB7XG4gICAgICBmb250LXdlaWdodDogYm9sZDtcbiAgICB9XG4gICAgXG4gICAgdGR7XG4gICAgICAgIGZvbnQtc2l6ZTogbWVkaXVtO1xuICAgIH1cbiAgICBcbiAgICAuZGl2aWRle1xuICAgICAgICB3aWR0aDogOTAlO1xuICAgIH1cbiAgICAucGVyc29uVGV4dHtcbiAgICAgICAgbWFyZ2luLWxlZnQ6IDIwcHg7XG4gICAgfVxufSJdfQ== */"]
       });
       /*@__PURE__*/
@@ -862,9 +852,9 @@
           }]
         }], function () {
           return [{
-            type: src_app_services_ticket_services_service__WEBPACK_IMPORTED_MODULE_4__["TicketServicesService"]
+            type: src_app_services_ticket_services_service__WEBPACK_IMPORTED_MODULE_3__["TicketServicesService"]
           }, {
-            type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_5__["MatDialog"]
+            type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_4__["MatDialog"]
           }];
         }, null);
       })();
